@@ -1,0 +1,595 @@
+/* ========================================
+   1. GLOBAL SETTINGS AND CSS VARIABLES
+======================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --dark-color: #101510;
+    --accent-color: #b7f34a;
+    --light-color: #ffffff;
+    --text-color: #333333;
+    --muted-color: #686d65;
+    --section-color: #f3f5ef;
+    --border-color: #e1e5dc;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 20px;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+a {
+    transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+section {
+    scroll-margin-top: 20px;
+}
+
+
+/* ========================================
+   2. WEBSITE HEADER AND NAVIGATION
+======================================== */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    padding: 20px 8%;
+    background-color: var(--dark-color);
+    color: var(--light-color);
+}
+
+header h1 {
+    margin: 0;
+    color: var(--accent-color);
+    font-size: 2rem;
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 20px;
+}
+
+nav a {
+    color: var(--light-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: var(--accent-color);
+}
+
+
+/* ========================================
+   3. HOME / HERO SECTION
+======================================== */
+
+.hero {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    padding: 80px 8%;
+    color: var(--light-color);
+
+    background-color: var(--dark-color);
+
+    background-image:
+        linear-gradient(
+            rgba(0, 0, 0, 0.65),
+            rgba(0, 0, 0, 0.65)
+        ),
+        url("https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1800&q=85");
+
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-content {
+    width: 100%;
+    max-width: 750px;
+}
+
+.hero-label,
+.section-label {
+    color: #658c20;
+    font-size: 0.85rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.hero-label {
+    color: var(--accent-color);
+}
+
+.hero h2 {
+    max-width: 700px;
+    margin: 12px 0 20px;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: 1.1;
+}
+
+.hero p:not(.hero-label) {
+    max-width: 550px;
+    font-size: 1.1rem;
+}
+
+
+/* ========================================
+   4. BUTTONS
+======================================== */
+
+.button {
+    display: inline-block;
+    padding: 14px 24px;
+    border: 2px solid var(--accent-color);
+    border-radius: 6px;
+
+    background-color: var(--accent-color);
+    color: var(--dark-color);
+
+    text-decoration: none;
+    text-align: center;
+    font-weight: bold;
+}
+
+.button:hover {
+    background-color: var(--light-color);
+    border-color: var(--light-color);
+}
+
+
+/* ========================================
+   5. GENERAL CONTENT SECTIONS
+======================================== */
+
+.content-section {
+    padding: 70px 8%;
+}
+
+.section-heading {
+    max-width: 750px;
+    margin: 0 auto 40px;
+    text-align: center;
+}
+
+.section-heading h2 {
+    margin: 10px 0;
+    color: var(--dark-color);
+    font-size: clamp(2rem, 4vw, 2.7rem);
+    line-height: 1.2;
+}
+
+.section-heading > p:last-child {
+    color: var(--muted-color);
+}
+
+
+/* ========================================
+   6. ABOUT SECTION
+======================================== */
+
+.about-features {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    margin-top: 40px;
+}
+
+.feature {
+    padding: 25px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--light-color);
+}
+
+.feature h3 {
+    margin-top: 0;
+    color: var(--dark-color);
+}
+
+.feature p {
+    margin-bottom: 0;
+    color: var(--muted-color);
+}
+
+
+/* ========================================
+   7. FITNESS CLASSES
+======================================== */
+
+.classes-section {
+    background-color: var(--section-color);
+}
+
+.class-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.class-card {
+    padding: 25px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    background-color: var(--light-color);
+
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.class-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.class-icon {
+    margin-bottom: 12px;
+    font-size: 2rem;
+}
+
+.class-card h3 {
+    color: var(--dark-color);
+}
+
+.class-card p {
+    margin-bottom: 0;
+    color: var(--muted-color);
+}
+
+
+/* ========================================
+   8. WEEKLY CLASS SCHEDULE
+======================================== */
+
+.schedule-heading {
+    margin: 55px 0 20px;
+    color: var(--dark-color);
+    font-size: 1.6rem;
+}
+
+.schedule-container {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 8px;
+    background-color: var(--light-color);
+}
+
+.class-schedule {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--light-color);
+}
+
+.class-schedule th,
+.class-schedule td {
+    padding: 18px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.class-schedule th {
+    background-color: var(--dark-color);
+    color: var(--light-color);
+}
+
+.class-schedule tbody tr:hover {
+    background-color: var(--section-color);
+}
+
+.class-schedule tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* ========================================
+   9. TRAINER CARDS
+======================================== */
+
+.trainer-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.trainer-card {
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    background-color: var(--light-color);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+}
+
+.trainer-avatar {
+    min-height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: var(--dark-color);
+    color: var(--accent-color);
+
+    font-size: 3rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.trainer-info {
+    padding: 24px;
+}
+
+.trainer-info h3 {
+    margin: 0;
+    color: var(--dark-color);
+    font-size: 1.3rem;
+}
+
+.trainer-specialty {
+    margin-top: 5px;
+    color: #658c20;
+    font-weight: bold;
+}
+
+.trainer-info p:last-child {
+    color: var(--muted-color);
+}
+
+
+/* ========================================
+   10. MEMBERSHIP PRICING CARDS
+======================================== */
+
+.membership-section {
+    background-color: var(--section-color);
+}
+
+.membership-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    align-items: stretch;
+}
+
+.membership-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    padding: 30px 24px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+
+    background-color: var(--light-color);
+}
+
+.membership-card h3 {
+    margin-top: 0;
+    color: var(--dark-color);
+    font-size: 1.5rem;
+}
+
+.membership-description {
+    color: var(--muted-color);
+}
+
+.membership-price {
+    margin: 15px 0;
+    color: var(--dark-color);
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.membership-price span {
+    font-size: 0.9rem;
+    font-weight: normal;
+    color: var(--muted-color);
+}
+
+.membership-card ul {
+    padding-left: 20px;
+    margin-bottom: 30px;
+}
+
+.membership-card li {
+    margin-bottom: 12px;
+}
+
+.featured-plan {
+    border: 2px solid var(--accent-color);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.popular-label {
+    align-self: flex-start;
+    margin: 0 0 12px;
+    padding: 5px 10px;
+    border-radius: 4px;
+
+    background-color: var(--accent-color);
+    color: var(--dark-color);
+
+    font-size: 0.75rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.membership-button {
+    width: 100%;
+    margin-top: auto;
+}
+
+
+/* ========================================
+   11. CONTACT SECTION
+======================================== */
+
+.contact-section {
+    background-color: var(--light-color);
+}
+
+.contact-details {
+    max-width: 650px;
+    margin: 0 auto;
+    padding: 28px;
+
+    border-left: 5px solid var(--accent-color);
+    border-radius: 8px;
+
+    background-color: var(--section-color);
+}
+
+.contact-details p {
+    margin: 0 0 18px;
+    overflow-wrap: anywhere;
+}
+
+.contact-details p:last-child {
+    margin-bottom: 0;
+}
+
+.contact-details a {
+    color: var(--dark-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.contact-details a:hover {
+    color: #658c20;
+    text-decoration: underline;
+}
+
+
+/* ========================================
+   12. WEBSITE FOOTER
+======================================== */
+
+footer {
+    padding: 24px 8%;
+    background-color: var(--dark-color);
+    color: var(--light-color);
+    text-align: center;
+}
+
+footer p {
+    margin: 0;
+}
+
+
+/* ========================================
+   13. TABLET RESPONSIVE DESIGN
+======================================== */
+
+@media (max-width: 900px) {
+    header {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    nav {
+        justify-content: center;
+    }
+
+    .class-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .about-features {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .trainer-grid,
+    .membership-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+
+/* ========================================
+   14. MOBILE RESPONSIVE DESIGN
+======================================== */
+
+@media (max-width: 600px) {
+    header {
+        padding: 20px 6%;
+    }
+
+    nav {
+        gap: 12px 16px;
+    }
+
+    nav a {
+        font-size: 0.9rem;
+    }
+
+    .hero {
+        min-height: 70vh;
+        padding: 60px 7%;
+    }
+
+    .hero h2 {
+        font-size: clamp(2.3rem, 10vw, 3.5rem);
+    }
+
+    .content-section {
+        padding: 50px 7%;
+    }
+
+    .about-features,
+    .class-grid,
+    .trainer-grid,
+    .membership-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .section-heading {
+        margin-bottom: 30px;
+    }
+
+    .schedule-heading {
+        margin-top: 40px;
+    }
+
+    .class-schedule {
+        min-width: 520px;
+    }
+
+    .class-schedule th,
+    .class-schedule td {
+        padding: 12px;
+        font-size: 0.85rem;
+    }
+
+    .contact-details {
+        padding: 20px;
+    }
+
+    footer {
+        padding: 24px 7%;
+    }
+}
+.trainer-photo {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto 18px;
+}
