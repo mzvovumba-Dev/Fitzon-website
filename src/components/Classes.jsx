@@ -1,12 +1,53 @@
-import { useState } from 'react'
-import classes from '../data/classes'
+import { useEffect, useState } from 'react'
+import strengthImage from '../../images/strength.jpg'
+import yogaImage from '../../images/yoga.jpg'
+import hiitImage from '../../images/HIIT.jpg'
+import pilatesImage from '../../images/pilates.jpg'
 import Rating from './Rating'
 
+const classImages = {
+  1: strengthImage,
+  2: yogaImage,
+  3: hiitImage,
+  4: pilatesImage,
+}
+
 function Classes() {
+  const [classes, setClasses] = useState([])
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [ratings, setRatings] = useState({})
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState('')
 
   const categories = ['All', 'Strength', 'Cardio', 'Mind & Body']
+
+  useEffect(() => {
+    async function fetchClasses() {
+      try {
+        const response = await fetch('http://localhost:5000/api/classes')
+
+        if (!response.ok) {
+          throw new Error('Could not load fitness classes.')
+        }
+
+        const data = await response.json()
+
+        setClasses(
+          data.map((fitnessClass) => ({
+            ...fitnessClass,
+            image: classImages[fitnessClass.id],
+          })),
+        )
+      } catch (err) {
+        console.error('Error loading classes:', err)
+        setError('Unable to load fitness classes. Please try again later.')
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchClasses()
+  }, [])
 
   const filteredClasses =
     selectedCategory === 'All'
@@ -57,41 +98,61 @@ function Classes() {
           ))}
         </div>
 
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {filteredClasses.map((fitnessClass) => (
-            <article
-              key={fitnessClass.id}
-              className="overflow-hidden rounded-xl bg-white shadow-md transition hover:-translate-y-1 hover:shadow-xl"
-            >
-              <img
-                src={fitnessClass.image}
-                alt={fitnessClass.name}
-                className="h-52 w-full object-cover"
-              />
+        {loading && (
+          <p className="text-center text-gray-600">
+            Loading fitness classes...
+          </p>
+        )}
 
-              <div className="p-6">
-                <span className="text-sm font-semibold text-orange-500">
-                  {fitnessClass.category}
-                </span>
+        {error && (
+          <p role="alert" className="text-center text-red-600">
+            {error}
+          </p>
+        )}
 
-                <h3 className="mt-2 text-xl font-bold text-gray-900">
-                  {fitnessClass.name}
-                </h3>
-
-                <p className="mt-3 text-sm leading-relaxed text-gray-600">
-                  {fitnessClass.description}
-                </p>
-
-                <Rating
-                  value={ratings[fitnessClass.id] ?? 5}
-                  onChange={(rating) =>
-                    handleRatingChange(fitnessClass.id, rating)
-                  }
+        {!loading && !error && (
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            {filteredClasses.map((fitnessClass) => (
+              <article
+                key={fitnessClass.id}
+                className="overflow-hidden rounded-xl bg-white shadow-md transition hover:-translate-y-1 hover:shadow-xl"
+              >
+                <img
+                  src={fitnessClass.image}
+                  alt={fitnessClass.name}
+                  className="h-52 w-full object-cover"
                 />
-              </div>
-            </article>
-          ))}
-        </div>
+
+                <div className="p-6">
+                  <span className="text-sm font-semibold text-orange-500">
+                    {fitnessClass.category}
+                  </span>
+
+                  <h3 className="mt-2 text-xl font-bold text-gray-900">
+                    {fitnessClass.name}
+                  </h3>
+
+                  <p className="mt-3 text-sm leading-relaxed text-gray-600">
+                    {fitnessClass.description}
+                  </p>
+
+                  <Rating
+                    value={ratings[fitnessClass.id] ?? 5}
+                    onChange={(rating) =>
+                      handleRatingChange(fitnessClass.id, rating)
+                    }
+                  />
+                </div>
+              </article>
+            ))}
+          </div>
+        )}
+
+        {!loading && !error && filteredClasses.length === 0 && (
+          <p className="text-center text-gray-600">
+            No classes found in this category.
+          </p>
+        )}
       </div>
     </section>
   )
