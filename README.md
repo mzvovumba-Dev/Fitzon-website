@@ -1,63 +1,76 @@
-# FitZone Fitness Website
+# FITZON
 
-## About the Project
-
-FitZone is a responsive fitness studio website developed as part of a Frontend Developer Practicum team project. The website provides visitors with information about fitness classes, trainers, class schedules, membership plans, and contact details.
-
-The goal of this project is to create a clean, user-friendly website that helps visitors explore the fitness studio's services.
+FITZON is a fitness website built with React and Vite, with an Express API and PostgreSQL database.
 
 ## Features
 
-- **Navigation:** Links to the main sections of the website.
-- **Hero Section:** Welcomes visitors with a fitness-themed background image.
-- **About Section:** Highlights the studio's features.
-- **Fitness Classes:** Displays Strength Training, Yoga, HIIT Workout, and Pilates.
-- **Class Schedule:** Shows class times and trainer information.
-- **Trainer Profiles:** Introduces trainers and their specialties.
-- **Membership Plans:** Presents Basic, Standard, and Premium membership options.
-- **Contact Section:** Displays contact information and opening hours.
-- **Responsive Design:** Uses CSS media queries to adapt the layout to different screen sizes.
+- Home page with the existing Hero, About, Classes, Trainers, and Contact sections.
+- Login and registration on the same page, separate from Contact.
+- Registration and login connected to the backend API.
+- Member dashboard after successful login.
+- Existing fitness classes loaded from the classes API.
+- Weekly timetable display showing sample class times, mentors, and trainee groups.
+- Responsive layouts using the project's existing Tailwind styles.
 
-## Technologies Used
+## Requirements
 
-- HTML5
-- CSS3
-- CSS Grid
-- Flexbox
-- Responsive Media Queries
-- Unsplash Images
+- Node.js (a current LTS release is recommended)
+- npm
+- PostgreSQL database
 
-## Live Demo
+## Run the frontend locally
 
-Visit the live website:
+From the project root:
 
-https://mzvovumba-dev.github.io/Fitzon-website/
+```bash
+npm install
+npm run dev
+```
 
-## GitHub Repository
+Vite prints the local development address in the terminal.
 
-https://github.com/mzvovumba-Dev/Fitzon-website
+## Run the backend locally
 
-## What I Learned
+```bash
+cd server
+npm install
+```
 
-Through this project, I practiced:
+Create a `server/.env` file locally with your own values:
 
-- Structuring webpages with semantic HTML.
-- Styling layouts with CSS.
-- Using Flexbox and CSS Grid.
-- Creating responsive layouts with media queries.
-- Adding and styling images.
-- Uploading project files to GitHub.
-- Publishing a website using GitHub Pages.
+```env
+DATABASE_URL=your_postgresql_connection_string
+JWT_SECRET=replace_with_a_long_random_secret
+PORT=5000
+```
 
-## Future Improvements
+Then start the API:
 
-- Add a working membership registration process.
-- Connect the contact section to a functional contact form.
-- Improve accessibility and test responsiveness across more devices.
-- Add more interactive features as my frontend development skills grow.
+```bash
+npm run dev
+```
 
----
+Do not commit `.env` files, database connection strings, passwords, JWT secrets, or other credentials.
 
-**Project:** FitZone Fitness Website  
-**Project Type:** Frontend Development Practicum  
-**Developer:** Monica Zvovumba
+## API routes currently used
+
+- `POST /api/auth/register` — creates a user account.
+- `POST /api/auth/login` — checks credentials and returns a JWT.
+- `GET /api/classes` — returns fitness classes from PostgreSQL.
+- `GET /api/db-test` — checks the database connection.
+
+The frontend currently uses the deployed API URL in the login and classes components. For local development, update those URLs to your local API address only if you intend to test against the local backend.
+
+## Timetable note
+
+The timetable currently contains example schedule entries for display purposes. Real bookings, trainee assignment, and mentor scheduling need corresponding database tables and API endpoints before they can be treated as live data.
+
+## Build the frontend
+
+From the project root:
+
+```bash
+npm run build
+```
+
+The generated `dist/` folder is build output; the source files are in `src/`.
