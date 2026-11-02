@@ -27,8 +27,8 @@ function Contact() {
     try {
       const endpoint =
         mode === 'signup'
-          ? 'http://localhost:5000/api/auth/register'
-          : 'http://localhost:5000/api/auth/login'
+          ? 'https://fitzon-website.onrender.com/api/auth/register'
+          : 'https://fitzon-website.onrender.com/api/auth/login'
 
       const body =
         mode === 'signup'

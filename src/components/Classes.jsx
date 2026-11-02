@@ -24,7 +24,7 @@ function Classes() {
   useEffect(() => {
     async function fetchClasses() {
       try {
-        const response = await fetch('http://localhost:5000/api/classes')
+        const response = await fetch('https://fitzon-website.onrender.com/api/classes')
 
         if (!response.ok) {
           throw new Error('Could not load fitness classes.')
