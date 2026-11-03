@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react'
 import Header from './components/Header'
 import Hero from './components/Hero'
@@ -11,11 +10,19 @@ import Login from './components/Login'
 import Dashboard from './components/Dashboard'
 import Timetable from './components/Timetable'
 import Pricing from './components/Pricing'
+import PaymentSuccess from './components/PaymentSuccess'
 
 function getPage() {
   const route = window.location.hash.replace('#', '').split('?')[0]
 
-  return ['login', 'dashboard', 'classes', 'timetable', 'pricing'].includes(route)
+  return [
+    'login',
+    'dashboard',
+    'classes',
+    'timetable',
+    'pricing',
+    'payment-success',
+  ].includes(route)
     ? route
     : 'home'
 }
@@ -71,6 +78,8 @@ function App() {
       {page === 'timetable' && user && <Timetable />}
 
       {page === 'pricing' && <Pricing />}
+
+      {page === 'payment-success' && <PaymentSuccess />}
 
       {page === 'home' && (
         <main>

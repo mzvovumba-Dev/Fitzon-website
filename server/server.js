@@ -390,6 +390,61 @@ app.get('/api/membership-plans', async (req, res) => {
 });
 
 // ==========================================
+// CHECK PAYMENT ORDER
+// ==========================================
+
+app.get(
+  '/api/orders/session/:sessionId',
+  authenticateToken,
+  async (req, res) => {
+    try {
+      const { sessionId } = req.params;
+      const userId = req.user.id;
+
+      if (!sessionId || !sessionId.startsWith('cs_')) {
+        return res.status(400).json({
+          message: 'Invalid Stripe session ID.',
+        });
+      }
+
+      const result = await pool.query(
+        `SELECT
+          o.id,
+          o.total_amount_cents,
+          o.currency,
+          o.status,
+          o.created_at,
+          mp.name AS membership_name
+         FROM orders o
+         JOIN order_items oi ON oi.order_id = o.id
+         JOIN membership_plans mp
+           ON mp.id = oi.membership_plan_id
+         WHERE o.stripe_session_id = $1
+           AND o.user_id = $2
+         LIMIT 1`,
+        [sessionId, userId]
+      );
+
+      if (result.rows.length === 0) {
+        return res.status(404).json({
+          message: 'Payment is still being confirmed.',
+        });
+      }
+
+      return res.json({
+        order: result.rows[0],
+      });
+    } catch (error) {
+      console.error('Order lookup error:', error.message);
+
+      return res.status(500).json({
+        message: 'Unable to check your payment.',
+      });
+    }
+  }
+);
+
+// ==========================================
 // START SERVER
 // ==========================================
 
